@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Poker.Checkers;
+using Poker.GameEntity;
+using Poker.HandAnalyzers;
 
 namespace Poker
 {
@@ -11,12 +14,11 @@ namespace Poker
 
         public Hand AnalyzeHand(string[] hand)
         {
-            if (hand.Length != 5)
-                throw new ArgumentException("invalid hand: wrong number of cards");
-
-            if (new HashSet<string>(hand).Count != hand.Length)
-                throw new ArgumentException("invalid hand: duplicates");
-
+            new InputChecker(hand);
+            IEnumerable<Card> cards = CreateCardList(hand);
+            return new AnalyzerChain().GetHand(cards);
+            
+            
             int[] faceCount = new int[Faces.Length];
             long straight = 0, flush = 0;
             foreach(var card in  hand)
@@ -76,6 +78,21 @@ namespace Poker
                 return Hand.Pair;
 
             return Hand.HighCard;
+        }
+
+        private List<Card> CreateCardList(string[] hand)
+        {
+            var cards = new List<Card>();
+            foreach (var card in hand)
+            {
+                cards.Add(new Card(card.ToUpper()));
+            }
+            //todo: remove this part and in the Card class
+            // foreach (var card in cards)
+            // {
+            //     card.PrintCard();
+            // }
+            return cards;
         }
     }
 }
