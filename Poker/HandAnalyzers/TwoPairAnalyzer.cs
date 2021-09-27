@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
+using Poker.Checkers;
 using Poker.GameEntity;
 
 namespace Poker.HandAnalyzers

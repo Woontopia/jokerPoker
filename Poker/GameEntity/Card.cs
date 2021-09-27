@@ -22,6 +22,16 @@ namespace Poker.GameEntity
             Console.WriteLine("-------");
         }
 
+        public CardSymbol GetCardSymbol()
+        {
+            return symbol;
+        }
+
+        public int GetCardValue()
+        {
+            return value;
+        }
+
         private void AssignValue(char value)
         {
             //todo: change to a better way
@@ -33,13 +43,13 @@ namespace Poker.GameEntity
                 this.value = 10;
             } else if (value == 'J')
             {
-                this.value = 10;
+                this.value = 11;
             } else if (value == 'Q')
             {
-                this.value = 10;
+                this.value = 12;
             } else if (value == 'K')
             {
-                this.value = 10;
+                this.value = 13;
             }
             else
             {
