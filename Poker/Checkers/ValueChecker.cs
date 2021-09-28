@@ -7,10 +7,18 @@ namespace Poker.Checkers
 {
     public class ValueChecker
     {
-        public bool sameValueCard()
+        public bool ContainsSameValueCardXTimes(IEnumerable<Card> cards, int numberOfTimes)
         {
             // var orderedCards = cards.GroupBy(card => card.GetCardSymbol()).SelectMany(card => card);
-            throw new NotImplementedException();
+            var cardValues = cards.Select(card => card.GetCardValue());
+            foreach (var value in cardValues.Distinct())
+            {
+                if (cardValues.Count(x => x == value) == numberOfTimes)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public bool ContainsSeriesOfCards(IEnumerable<Card> cards, IEnumerable<int> values)
