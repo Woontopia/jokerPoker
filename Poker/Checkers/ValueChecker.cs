@@ -26,5 +26,11 @@ namespace Poker.Checkers
             var cardValues = cards.Select(card => card.GetCardValue());
             return cardValues.Intersect(values).Count() == cards.Count();
         }
+
+        public bool ContainsPairs(IEnumerable<Card> cards, int numberOfPairs)
+        {
+            var cardValues = cards.Select(card => card.GetCardValue()).Distinct();
+            return cardValues.Count() + numberOfPairs == 5;
+        }
     }
 }
