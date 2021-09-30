@@ -10,16 +10,22 @@ namespace Poker.Checkers
         public bool ContainsStraight(IEnumerable<Card> cards, int numberOfCards)
         {
             var cardValues = cards.Select(card => card.GetCardValue()).OrderBy(x => x).ToList();
-            var count = 0;
-            for (int i = 1; i < cardValues.Count(); i++)
+            if(cardValues.Contains(1))
+                cardValues.Add(14);
+
+            int count = 1;
+            int maxCount = 0;
+            for (int i = 0; i < cardValues.Count(); i++)
             {
-                if (cardValues[i] - 1 == cardValues[i - 1])
+                if (i + 1 < cardValues.Count())
                 {
-                    count++;
+                    count = (cardValues[i] + 1 == cardValues[i + 1]) ? count + 1 : 0;
+                    if (count == numberOfCards)
+                        return true;
                 }
             }
-            // Console.WriteLine(count);
-            return count >= numberOfCards;
+
+            return false;
         }
     }
 }

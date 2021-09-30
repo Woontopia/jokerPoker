@@ -65,7 +65,7 @@ namespace Poker.GameEntity
         {
             //todo: might need to change
             if (symbol == CardSymbol.Joker)
-                value = 0;
+                value = 16;
         }
         
     }
