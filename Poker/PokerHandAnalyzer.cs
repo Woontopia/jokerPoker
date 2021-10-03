@@ -23,11 +23,6 @@ namespace Poker
             {
                 cards.Add(new Card(card.ToUpper()));
             }
-
-            foreach (var card in cards)
-            {
-                Console.WriteLine(card.GetCardValue());
-            }
             return cards;
         }
     }

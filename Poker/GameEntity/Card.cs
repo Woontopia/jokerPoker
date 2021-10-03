@@ -5,8 +5,8 @@ namespace Poker.GameEntity
     public class Card
     {
 
-        private int value;
         private Face face;
+        private int value;
         private Suit symbol;
         
         public Card(string cardInfo)
@@ -21,36 +21,14 @@ namespace Poker.GameEntity
         }
         public int GetCardValue()
         {
-            return value;
+            return face.GetHashCode();
         }
         
         private void AssignFace(char face)
         {
-            this.face = (Face)face;
-            AssignValue();
+            Enum.TryParse(face.ToString(), out this.face);
         }
 
-        private void AssignValue()
-        {
-            //todo: Might change for enumExtension
-            value = face.GetHashCode() - '0';
-            if (face == Face.One)
-            {
-                value = 1;
-            } else if (face == Face.Ten)
-            {
-                value = 10;
-            } else if (face == Face.Jack)
-            {
-                value = 11;
-            } else if (face == Face.Queen)
-            {
-                value = 12;
-            } else if (face == Face.King)
-            {
-                value = 13;
-            }
-        }
         private void AssignSymbol(char cardSymbol)
         {
             symbol = (Suit)cardSymbol;
@@ -58,7 +36,7 @@ namespace Poker.GameEntity
         private void HandleJoker()
         {
             if (symbol == Suit.Joker)
-                value = Face.Joker.GetHashCode() - '0';
+                face = Face.Joker;
         }
         
     }

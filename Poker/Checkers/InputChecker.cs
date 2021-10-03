@@ -31,8 +31,8 @@ namespace Poker.Checkers
         {
             foreach(var card in  hand)
             {
-                if (!Enum.IsDefined(typeof(Face), (int)card[0]))
-                    throw new ArgumentException("Invalid hand: non-existing suit");
+                if (!Enum.IsDefined(typeof(Face), card[0] - '0') && !Enum.IsDefined(typeof(Face), card[0].ToString()))
+                    throw new ArgumentException("Invalid hand: non-existing Face");
             }
         }
 
