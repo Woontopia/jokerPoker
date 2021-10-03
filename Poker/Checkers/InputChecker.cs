@@ -6,8 +6,6 @@ namespace Poker.Checkers
 {
     public class InputChecker
     {
-        static readonly string Faces = "AKQJT98765432";
-        
         public InputChecker(string[] hand)
         {
             VerifyLength(hand);
@@ -24,7 +22,7 @@ namespace Poker.Checkers
 
         private void VerifyDuplicates(string[] hand)
         {
-            //todo: check for duplicates with the Faces enum
+            //TODO: Check for duplicates other than Jokers
             // if (new HashSet<string>(hand).Count != hand.Length)
             //     throw new ArgumentException("invalid hand: duplicates");
         }
@@ -33,9 +31,8 @@ namespace Poker.Checkers
         {
             foreach(var card in  hand)
             {
-                int face = Faces.IndexOf(card[0]);
-                if (face == -1)
-                    throw new ArgumentException("invalid hand: non existing face");
+                if (!Enum.IsDefined(typeof(Face), (int)card[0]))
+                    throw new ArgumentException("Invalid hand: non-existing suit");
             }
         }
 
@@ -43,7 +40,7 @@ namespace Poker.Checkers
         {
             foreach(var card in  hand)
             {
-                if(Enum.IsDefined(typeof(Suit), card[1].ToString()))
+                if (!Enum.IsDefined(typeof(Suit), (int)card[1]))
                     throw new ArgumentException("Invalid hand: non-existing suit");
             }
         }

@@ -9,9 +9,6 @@ namespace Poker
 {
     public class PokerHandAnalyzer
     {
-        static readonly string Faces = "AKQJT98765432";
-        static readonly string Suits = "HDSC";
-
         public Hand AnalyzeHand(string[] hand)
         {
             new InputChecker(hand);
@@ -25,6 +22,11 @@ namespace Poker
             foreach (var card in hand)
             {
                 cards.Add(new Card(card.ToUpper()));
+            }
+
+            foreach (var card in cards)
+            {
+                Console.WriteLine(card.GetCardValue());
             }
             return cards;
         }

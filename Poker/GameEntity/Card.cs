@@ -6,11 +6,12 @@ namespace Poker.GameEntity
     {
 
         private int value;
+        private Face face;
         private Suit symbol;
         
         public Card(string cardInfo)
         {
-            AssignValue(cardInfo[0]);
+            AssignFace(cardInfo[0]);
             AssignSymbol(cardInfo[1]);
             HandleJoker();
         }
@@ -23,30 +24,32 @@ namespace Poker.GameEntity
             return value;
         }
         
-        private void AssignValue(char value)
+        private void AssignFace(char face)
         {
-            //todo: change to a better way
-            if (value == 'A')
+            this.face = (Face)face;
+            AssignValue();
+        }
+
+        private void AssignValue()
+        {
+            //todo: Might change for enumExtension
+            value = face.GetHashCode() - '0';
+            if (face == Face.One)
             {
-                this.value = 1;
-            } else if (value == 'T')
+                value = 1;
+            } else if (face == Face.Ten)
             {
-                this.value = 10;
-            } else if (value == 'J')
+                value = 10;
+            } else if (face == Face.Jack)
             {
-                this.value = 11;
-            } else if (value == 'Q')
+                value = 11;
+            } else if (face == Face.Queen)
             {
-                this.value = 12;
-            } else if (value == 'K')
+                value = 12;
+            } else if (face == Face.King)
             {
-                this.value = 13;
+                value = 13;
             }
-            else
-            {
-                this.value = value - '0';
-            }
-            
         }
         private void AssignSymbol(char cardSymbol)
         {
@@ -54,9 +57,8 @@ namespace Poker.GameEntity
         }
         private void HandleJoker()
         {
-            //todo: might need to change
             if (symbol == Suit.Joker)
-                value = 16;
+                value = Face.Joker.GetHashCode() - '0';
         }
         
     }

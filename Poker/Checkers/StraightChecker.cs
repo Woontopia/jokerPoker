@@ -14,8 +14,8 @@ namespace Poker.Checkers
             if(cardValues.Contains(1))
                 cardValues.Add(14);
 
-            int count = 1;
-            for (int i = 0; i < cardValues.Count(); i++)
+            var count = 1;
+            for (var i = 0; i < cardValues.Count(); i++)
             {
                 if (i + 1 < cardValues.Count())
                 {
@@ -30,7 +30,7 @@ namespace Poker.Checkers
         
         private int CountJokers(IEnumerable<Card> cards)
         {
-            return cards.Select(card => card).Where(x => x.GetCardSymbol() == Suit.Joker).Count();
+            return cards.Select(card => card.GetCardSymbol()).Count(x => x == Suit.Joker);
         }
     }
 }
