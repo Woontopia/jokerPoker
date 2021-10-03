@@ -9,10 +9,10 @@ namespace Poker.Checkers
     {
         public bool ContainsXNumberOfSameSymbol(IEnumerable<Card> cards, int numberOfTimes)
         {
-            return GetCardsOfMostFrequentSymbol(cards).Count() >= numberOfTimes;
+            return GetCardsOfMostFrequentSymbol(cards).Count() >= numberOfTimes - CountJokers(cards);
         }
         
-        private IEnumerable<Card> GetCardsOfSameSymbol(IEnumerable<Card> cards, CardSymbol symbol)
+        private IEnumerable<Card> GetCardsOfSameSymbol(IEnumerable<Card> cards, Suit symbol)
         {
             return cards.Select(card => card).Where(x => x.GetCardSymbol() == symbol);
         }
@@ -21,17 +21,22 @@ namespace Poker.Checkers
         {
             //todo: check to do with group by then order by
             var highestFrequency = 0;
-            var cardSymbol = CardSymbol.Club;
-            foreach (var symbol in Enum.GetValues(typeof(CardSymbol)))
+            var cardSymbol = Suit.Club;
+            foreach (var symbol in Enum.GetValues(typeof(Suit)))
             {
-                var list = GetCardsOfSameSymbol(cards, (CardSymbol)symbol);
+                var list = GetCardsOfSameSymbol(cards, (Suit)symbol);
                 if (highestFrequency < list.Count())
                 {
                     highestFrequency = list.Count();
-                    cardSymbol = (CardSymbol)symbol;
+                    cardSymbol = (Suit)symbol;
                 }
             }
             return GetCardsOfSameSymbol(cards, cardSymbol);
+        }
+
+        private int CountJokers(IEnumerable<Card> cards)
+        {
+            return GetCardsOfSameSymbol(cards, Suit.Joker).Count();
         }
     }
 }

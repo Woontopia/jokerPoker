@@ -6,7 +6,7 @@ namespace Poker.GameEntity
     {
 
         private int value;
-        private CardSymbol symbol;
+        private Suit symbol;
         
         public Card(string cardInfo)
         {
@@ -14,24 +14,15 @@ namespace Poker.GameEntity
             AssignSymbol(cardInfo[1]);
             HandleJoker();
         }
-
-        public void PrintCard()
-        {
-            Console.WriteLine(value);
-            Console.WriteLine(symbol);
-            Console.WriteLine("-------");
-        }
-
-        public CardSymbol GetCardSymbol()
+        public Suit GetCardSymbol()
         {
             return symbol;
         }
-
         public int GetCardValue()
         {
             return value;
         }
-
+        
         private void AssignValue(char value)
         {
             //todo: change to a better way
@@ -59,12 +50,12 @@ namespace Poker.GameEntity
         }
         private void AssignSymbol(char cardSymbol)
         {
-            symbol = (CardSymbol)cardSymbol;
+            symbol = (Suit)cardSymbol;
         }
         private void HandleJoker()
         {
             //todo: might need to change
-            if (symbol == CardSymbol.Joker)
+            if (symbol == Suit.Joker)
                 value = 16;
         }
         

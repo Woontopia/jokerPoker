@@ -1,6 +1,6 @@
 namespace Poker.GameEntity
 {
-    public enum CardSymbol
+    public enum Suit
     {
         Spade = 'S',
         Heart = 'H',

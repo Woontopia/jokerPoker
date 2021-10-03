@@ -1,14 +1,12 @@
 using System;
 using System.Collections.Generic;
+using Poker.GameEntity;
 
 namespace Poker.Checkers
 {
     public class InputChecker
     {
         static readonly string Faces = "AKQJT98765432";
-        
-        //TODO: change the string to get all available values in CardSymbol enum
-        static readonly string Suits = "HDSC";
         
         public InputChecker(string[] hand)
         {
@@ -26,8 +24,9 @@ namespace Poker.Checkers
 
         private void VerifyDuplicates(string[] hand)
         {
-            if (new HashSet<string>(hand).Count != hand.Length)
-                throw new ArgumentException("invalid hand: duplicates");
+            //todo: check for duplicates with the Faces enum
+            // if (new HashSet<string>(hand).Count != hand.Length)
+            //     throw new ArgumentException("invalid hand: duplicates");
         }
 
         private void VerifyFaces(string[] hand)
@@ -44,8 +43,8 @@ namespace Poker.Checkers
         {
             foreach(var card in  hand)
             {
-                if (Suits.IndexOf(card[1]) == -1)
-                    throw new ArgumentException("invalid hand: non-existing suit");
+                if(Enum.IsDefined(typeof(Suit), card[1].ToString()))
+                    throw new ArgumentException("Invalid hand: non-existing suit");
             }
         }
         

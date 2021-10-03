@@ -26,11 +26,6 @@ namespace Poker
             {
                 cards.Add(new Card(card.ToUpper()));
             }
-            //todo: remove this part and in the Card class
-            // foreach (var card in cards)
-            // {
-            //     card.PrintCard();
-            // }
             return cards;
         }
     }

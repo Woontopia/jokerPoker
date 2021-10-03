@@ -9,7 +9,7 @@ namespace Poker.Checkers
     {
         public bool ContainsSameValueCardXTimes(IEnumerable<Card> cards, int numberOfTimes)
         {
-            // var orderedCards = cards.GroupBy(card => card.GetCardSymbol()).SelectMany(card => card);
+            var numberOfJokers = CountJokers(cards);
             var cardValues = cards.Select(card => card.GetCardValue());
             foreach (var value in cardValues.Distinct())
             {
@@ -24,13 +24,18 @@ namespace Poker.Checkers
         public bool ContainsSeriesOfCards(IEnumerable<Card> cards, IEnumerable<int> values)
         {
             var cardValues = cards.Select(card => card.GetCardValue());
-            return cardValues.Intersect(values).Count() == cards.Count();
+            return cardValues.Intersect(values).Count() == cards.Count() - CountJokers(cards);
         }
 
         public bool ContainsPairs(IEnumerable<Card> cards, int numberOfPairs)
         {
             var cardValues = cards.Select(card => card.GetCardValue()).Distinct();
             return cardValues.Count() + numberOfPairs == 5;
+        }
+        
+        private int CountJokers(IEnumerable<Card> cards)
+        {
+            return cards.Select(card => card.GetCardSymbol()).Count(x => x == Suit.Joker);
         }
     }
 }
