@@ -29,6 +29,9 @@ namespace Poker.Checkers
 
         public bool ContainsPairs(IEnumerable<Card> cards, int numberOfPairs)
         {
+            var numberOfJokers = CountJokers(cards);
+            if (numberOfJokers == numberOfPairs)
+                return true;
             var cardValues = cards.Select(card => card.GetCardValue()).Distinct();
             return cardValues.Count() + numberOfPairs == 5;
         }
