@@ -20,5 +20,15 @@ namespace Poker.HandAnalyzers
                 
             return nextAnalyzer.AnalyzeHand(cards);
         }
+
+        protected override bool BaseCondition(IEnumerable<Card> cards)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        protected override bool JokerCondition(IEnumerable<Card> cards)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

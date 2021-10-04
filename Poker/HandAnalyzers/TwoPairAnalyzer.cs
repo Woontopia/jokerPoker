@@ -16,10 +16,21 @@ namespace Poker.HandAnalyzers
 
         public override Hand AnalyzeHand(IEnumerable<Card> cards)
         {
-            if (_valueChecker.ContainsPairs(cards, 2))
+            if (BaseCondition(cards) || JokerCondition(cards))
                 return Hand.TwoPair;
                 
             return nextAnalyzer.AnalyzeHand(cards);
+        }
+
+        protected override bool BaseCondition(IEnumerable<Card> cards)
+        {
+            return _valueChecker.ContainsPairs(cards, 2);
+        }
+
+        protected override bool JokerCondition(IEnumerable<Card> cards)
+        {
+            // Base Condition for 2 Jokers
+            return CountJokers(cards) == 2;
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Poker.Checkers
     {
         public bool ContainsXNumberOfSameSymbol(IEnumerable<Card> cards, int numberOfTimes)
         {
-            return GetCardsOfMostFrequentSymbol(cards).Count() >= numberOfTimes - CountJokers(cards);
+            return GetCardsOfMostFrequentSymbol(cards).Count() >= numberOfTimes;
         }
         
         private IEnumerable<Card> GetCardsOfSameSymbol(IEnumerable<Card> cards, Suit symbol)
@@ -19,7 +19,6 @@ namespace Poker.Checkers
 
         private IEnumerable<Card> GetCardsOfMostFrequentSymbol(IEnumerable<Card> cards)
         {
-            //todo: check to do with group by then order by
             var highestFrequency = 0;
             var cardSymbol = Suit.Club;
             foreach (var symbol in Enum.GetValues(typeof(Suit)))
@@ -32,11 +31,6 @@ namespace Poker.Checkers
                 }
             }
             return GetCardsOfSameSymbol(cards, cardSymbol);
-        }
-
-        private int CountJokers(IEnumerable<Card> cards)
-        {
-            return GetCardsOfSameSymbol(cards, Suit.Joker).Count();
         }
     }
 }

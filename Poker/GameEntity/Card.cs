@@ -6,7 +6,6 @@ namespace Poker.GameEntity
     {
 
         private Face face;
-        private int value;
         private Suit symbol;
         
         public Card(string cardInfo)
@@ -28,7 +27,6 @@ namespace Poker.GameEntity
         {
             Enum.TryParse(face.ToString(), out this.face);
         }
-
         private void AssignSymbol(char cardSymbol)
         {
             symbol = (Suit)cardSymbol;

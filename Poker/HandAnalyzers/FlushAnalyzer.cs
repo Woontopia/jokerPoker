@@ -16,10 +16,20 @@ namespace Poker.HandAnalyzers
 
         public override Hand AnalyzeHand(IEnumerable<Card> cards)
         {
-            if (_symbolChecker.ContainsXNumberOfSameSymbol(cards, 5))
+            if (BaseCondition(cards) || JokerCondition(cards))
                 return Hand.Flush;
             
             return nextAnalyzer.AnalyzeHand(cards);
+        }
+
+        protected override bool BaseCondition(IEnumerable<Card> cards)
+        {
+            return _symbolChecker.ContainsXNumberOfSameSymbol(cards, 5);
+        }
+
+        protected override bool JokerCondition(IEnumerable<Card> cards)
+        {
+            return _symbolChecker.ContainsXNumberOfSameSymbol(cards, 5 - CountJokers(cards));
         }
     }
 }
