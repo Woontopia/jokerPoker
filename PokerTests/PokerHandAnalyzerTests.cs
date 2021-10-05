@@ -27,7 +27,10 @@ namespace PokerTests
         public void ThreeOfAKind() => TestHand(Hand.ThreeOfAKind, "8S 8D 8H QC JS");
 
         [TestMethod]
-        public void Straight() => TestHand(Hand.Straight, "3S 4D 5S 6H 7C");
+        public void Straight() => TestHand(Hand.Straight, "3S 4D 5S 6H 7C"); 
+        
+        [TestMethod]
+        public void StraightAce() => TestHand(Hand.Straight, "AS KD QS TH JC"); 
 
         [TestMethod]
         public void Flush() => TestHand(Hand.Flush, "3D 6D 9D QD KD");
@@ -56,6 +59,9 @@ namespace PokerTests
         [TestMethod]
         public void JokerStraight() => TestHand(Hand.Straight, "3S 4D JK 6H 7C");
 
+        [TestMethod]
+        public void JokerStraightMin() => TestHand(Hand.Straight, "5S 4D JK 6H 7C");
+        
         [TestMethod]
         public void JokerStraight2() => TestHand(Hand.Straight, "4H 2S AH JK JK");
 

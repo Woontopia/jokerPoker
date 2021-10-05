@@ -7,24 +7,31 @@ namespace Poker.Checkers
 {
     public class StraightChecker
     {
-        public bool ContainsStraight(IEnumerable<Card> cards, int numberOfCards)
+        public bool ContainsStraight(IEnumerable<Card> cards, int straightLength)
         {
-            var cardValues = cards.Select(card => card.GetCardValue()).OrderBy(x => x).ToList();
-            if(cardValues.Contains(1))
-                cardValues.Add(14);
-
-            var count = 1;
-            for (var i = 0; i < cardValues.Count(); i++)
+            var cardValues = cards.Select(card => card.GetCardValue()).Where(value => value != Face.Joker.GetHashCode()).OrderBy(x => x).ToList();
+            if (cardValues.Contains(1) && cardValues.Max() == 13)
             {
-                if (i + 1 < cardValues.Count())
-                {
-                    count = (cardValues[i] + 1 == cardValues[i + 1]) ? count + 1 : 0;
-                    if (count == numberOfCards)
-                        return true;
-                }
+                cardValues.Add(14);
+                cardValues.Remove(1);
             }
+            var noGapList = Enumerable.Range(cardValues.Min(), cardValues.Max() - cardValues.Min() + 1);
+            var missingValues = noGapList.Except(cardValues).Select(x => x);
+            return missingValues.Count() == cards.Count() - straightLength;
+        }
 
-            return false;
+        public bool Hi(IEnumerable<Card> cards, int straightLength)
+        {
+            var nbJoker = cards.Select(card => card.GetCardSymbol()).Count(x => x == Suit.Joker);
+            var cardValues = cards.Select(card => card.GetCardValue()).Where(value => value != Face.Joker.GetHashCode()).OrderBy(x => x).ToList();
+            if (cardValues.Contains(1) && cardValues.Max() == 13)
+            {
+                cardValues.Add(14);
+                cardValues.Remove(1);
+            }
+            Console.WriteLine(cardValues.Max());
+            Console.WriteLine(cardValues.Min());
+            return cardValues.Max() - cardValues.Min() == straightLength;
         }
     }
 }

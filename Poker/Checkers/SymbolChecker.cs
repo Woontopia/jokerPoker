@@ -7,7 +7,7 @@ namespace Poker.Checkers
 {
     public class SymbolChecker
     {
-        public bool ContainsXNumberOfSameSymbol(IEnumerable<Card> cards, int numberOfTimes)
+        public bool ContainsSameSymbolCards(IEnumerable<Card> cards, int numberOfTimes)
         {
             return GetCardsOfMostFrequentSymbol(cards).Count() >= numberOfTimes;
         }

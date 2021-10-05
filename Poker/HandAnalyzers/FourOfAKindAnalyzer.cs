@@ -25,7 +25,7 @@ namespace Poker.HandAnalyzers
 
         protected override bool BaseCondition(IEnumerable<Card> cards)
         {
-            return _valueChecker.ContainsSameValueCardXTimes(cards, 4);
+            return _valueChecker.ContainsSameValueCard(cards, 4);
         }
 
         protected override bool JokerCondition(IEnumerable<Card> cards)
@@ -36,14 +36,14 @@ namespace Poker.HandAnalyzers
         
         private bool OneJokerCondition(IEnumerable<Card> cards)
         {
-            return numberOfJokers == 1 && _valueChecker.ContainsSameValueCardXTimes(cards, 3);
+            return numberOfJokers == 1 && _valueChecker.ContainsSameValueCard(cards, 3);
         }
 
         private bool TwoJokerCondition(IEnumerable<Card> cards)
         {
             // Normally it is one Pair but since we also have a pair of Jokers it needs to be 2 pairs
             return numberOfJokers == 2 && (_valueChecker.ContainsPairs(cards, 2) ||
-                                           _valueChecker.ContainsSameValueCardXTimes(cards, 3));
+                                           _valueChecker.ContainsSameValueCard(cards, 3));
         }
     }
 }

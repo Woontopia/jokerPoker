@@ -26,7 +26,7 @@ namespace Poker.HandAnalyzers
 
         protected override bool BaseCondition(IEnumerable<Card> cards)
         {
-            return _valueChecker.ContainsSameValueCardXTimes(cards, 3);
+            return _valueChecker.ContainsSameValueCard(cards, 3);
         }
 
         protected override bool JokerCondition(IEnumerable<Card> cards)

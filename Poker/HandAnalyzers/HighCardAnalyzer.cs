@@ -17,12 +17,12 @@ namespace Poker.HandAnalyzers
 
         protected override bool BaseCondition(IEnumerable<Card> cards)
         {
-            throw new System.NotImplementedException();
+            return true;
         }
 
         protected override bool JokerCondition(IEnumerable<Card> cards)
         {
-            throw new System.NotImplementedException();
+            return true;
         }
     }
 }

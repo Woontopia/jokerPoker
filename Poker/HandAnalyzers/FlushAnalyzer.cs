@@ -24,12 +24,12 @@ namespace Poker.HandAnalyzers
 
         protected override bool BaseCondition(IEnumerable<Card> cards)
         {
-            return _symbolChecker.ContainsXNumberOfSameSymbol(cards, 5);
+            return _symbolChecker.ContainsSameSymbolCards(cards, 5);
         }
 
         protected override bool JokerCondition(IEnumerable<Card> cards)
         {
-            return _symbolChecker.ContainsXNumberOfSameSymbol(cards, 5 - CountJokers(cards));
+            return _symbolChecker.ContainsSameSymbolCards(cards, 5 - CountJokers(cards));
         }
     }
 }
