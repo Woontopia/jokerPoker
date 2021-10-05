@@ -28,9 +28,14 @@ namespace Poker.Checkers
 
         public bool ContainsPairs(IEnumerable<Card> cards, int numberOfPairs)
         {
-            // todo: change so it doesnt take a pair of jokers as a pair;
             var cardValues = cards.Select(card => card.GetCardValue()).Distinct();
             return cardValues.Count() + numberOfPairs == 5;
+        }
+
+        public bool ContainsDistinctCards(IEnumerable<Card> cards, int numberOfCards)
+        {
+            // Gets all the card values then removes the cards that are jokers
+            return cards.Select(card => card.GetCardValue()).Where(value => value != Face.Joker.GetHashCode()).Distinct().Count() == numberOfCards;
         }
     }
 }

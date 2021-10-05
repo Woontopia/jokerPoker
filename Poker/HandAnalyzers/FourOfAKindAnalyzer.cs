@@ -17,7 +17,6 @@ namespace Poker.HandAnalyzers
 
         public override Hand AnalyzeHand(IEnumerable<Card> cards)
         {
-            numberOfJokers = CountJokers(cards);
             if (BaseCondition(cards) || JokerCondition(cards))
                 return Hand.FourOfAKind;
                 
@@ -31,6 +30,7 @@ namespace Poker.HandAnalyzers
 
         protected override bool JokerCondition(IEnumerable<Card> cards)
         {
+            numberOfJokers = CountJokers(cards);
             return OneJokerCondition(cards) || TwoJokerCondition(cards);
         }
         
@@ -41,7 +41,8 @@ namespace Poker.HandAnalyzers
 
         private bool TwoJokerCondition(IEnumerable<Card> cards)
         {
-            return numberOfJokers == 2 && (_valueChecker.ContainsPairs(cards, 1) ||
+            // Normally it is one Pair but since we also have a pair of Jokers it needs to be 2 pairs
+            return numberOfJokers == 2 && (_valueChecker.ContainsPairs(cards, 2) ||
                                            _valueChecker.ContainsSameValueCardXTimes(cards, 3));
         }
     }

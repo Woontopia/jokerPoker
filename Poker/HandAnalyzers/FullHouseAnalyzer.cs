@@ -15,7 +15,7 @@ namespace Poker.HandAnalyzers
 
         public override Hand AnalyzeHand(IEnumerable<Card> cards)
         {
-            if (_valueChecker.ContainsSameValueCardXTimes(cards, 3) && _valueChecker.ContainsSameValueCardXTimes(cards, 2))
+            if (BaseCondition(cards) || JokerCondition(cards))
                 return Hand.FullHouse;
             
             return nextAnalyzer.AnalyzeHand(cards);
@@ -23,12 +23,14 @@ namespace Poker.HandAnalyzers
 
         protected override bool BaseCondition(IEnumerable<Card> cards)
         {
-            throw new System.NotImplementedException();
+            return _valueChecker.ContainsSameValueCardXTimes(cards, 3) &&
+                   _valueChecker.ContainsSameValueCardXTimes(cards, 2);
         }
 
         protected override bool JokerCondition(IEnumerable<Card> cards)
         {
-            throw new System.NotImplementedException();
+            // Can only contain one Joker, FullHouse with 2 jokers is impossible
+            return CountJokers(cards) == 1 && _valueChecker.ContainsPairs(cards, 2);
         }
     }
 }
