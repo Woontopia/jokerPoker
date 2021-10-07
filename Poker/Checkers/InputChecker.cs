@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Poker.GameEntity;
 
 namespace Poker.Checkers
@@ -21,9 +23,10 @@ namespace Poker.Checkers
 
         private void VerifyDuplicates(string[] hand)
         {
-            //TODO: Check for duplicates other than Jokers
-            // if (new HashSet<string>(hand).Count != hand.Length)
-            //     throw new ArgumentException("invalid hand: duplicates");
+            var hashSet = new HashSet<string>(hand);
+            hashSet.Remove("JK");
+            if (hashSet.Count + hand.Count(value => value.Equals("JK")) != hand.Length)
+                throw new ArgumentException("Invalid hand: duplicates");
         }
 
         private void VerifyFaces(string[] hand)
