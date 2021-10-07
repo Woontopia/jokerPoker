@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using Poker.Checkers;
 using Poker.GameEntity;
 using Poker.HandAnalyzers;

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Poker.GameEntity;
@@ -34,7 +33,6 @@ namespace Poker.Checkers
 
         public bool ContainsDistinctCards(IEnumerable<Card> cards, int numberOfCards)
         {
-            // Gets all the card values then removes the cards that are jokers
             return cards.Select(card => card.GetCardValue()).Where(value => value != Face.Joker.GetHashCode()).Distinct().Count() == numberOfCards;
         }
     }

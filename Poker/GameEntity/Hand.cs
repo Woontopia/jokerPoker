@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿// Should be Poker.GameEntity but would break teacher unit tests
 namespace Poker
 {
     public enum Hand

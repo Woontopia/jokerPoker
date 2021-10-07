@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Poker.GameEntity;
 
 namespace Poker.Checkers
