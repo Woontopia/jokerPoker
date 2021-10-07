@@ -66,6 +66,9 @@ namespace PokerTests
         public void JokerStraight2() => TestHand(Hand.Straight, "4H 2S AH JK JK");
         
         [TestMethod]
+        public void JokerStraight2Middle() => TestHand(Hand.Straight, "3S 4D JK JK 7C");
+        
+        [TestMethod]
         public void JokerStraight3() => TestHand(Hand.Straight, "4H 2S 3H JK JK");
 
         [TestMethod]
