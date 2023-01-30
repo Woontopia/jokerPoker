@@ -8,4 +8,4 @@ wildcard to be transformed to any possible card, so a hand like this: __joker  2
 be recognized as a three-of-a-kind.
 
 ## Solution
-This solution was heavily inspired by another of my [GitHub Repo](https://github.com/Woontopia/poker).
+This solution was heavily inspired by another one of my [GitHub Repo](https://github.com/Woontopia/poker).
